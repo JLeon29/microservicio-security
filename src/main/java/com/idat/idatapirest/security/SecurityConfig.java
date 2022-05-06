@@ -84,8 +84,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		// SPRING SECURITY CON JWT
 		
-		http.authorizeHttpRequests()
+		http.authorizeRequests()
 			.antMatchers("/crearToken").permitAll()
+			.antMatchers("/cliente/v1/*").access("hasRole('ADMIN')")
+			.antMatchers("/producto/v1/*").access("hasRole('ADMIN')")
 			.anyRequest()
 			.authenticated()
 			.and()
